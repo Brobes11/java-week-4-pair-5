@@ -1,18 +1,22 @@
+package com.techelevator;
 import java.math.BigDecimal;
 
 public class Beverage implements VendableItems {
 	private String name;
 	private BigDecimal price;
 	private int quantity;
+	private String slot;
 
-	public Beverage (String name, BigDecimal price, int quantity) {
+	public Beverage (String slot, String name, BigDecimal price, int quantity) {
 
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
 				
 	}
-
+	public String getSlot() {
+		return slot;
+	}
 	public String getName() {
 		return name;
 	}
@@ -30,6 +34,12 @@ public class Beverage implements VendableItems {
 		quantity= getQuantity()-1;
 		return vendMsg;
 		
+	}
+
+	@Override
+	public String slot() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

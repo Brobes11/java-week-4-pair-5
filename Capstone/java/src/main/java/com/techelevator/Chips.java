@@ -1,13 +1,14 @@
+package com.techelevator;
 import java.math.BigDecimal;
 
-
-public class Gum implements VendableItems{
+public class Chips implements VendableItems {
 	private String name;
 	private BigDecimal price;
 	private int quantity;
+	private String slot;
 
-	public Gum(String name, BigDecimal price, int quantity) {
-
+	public Chips(String slot, String name, BigDecimal price, int quantity) {
+		this.slot = slot;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
@@ -27,10 +28,24 @@ public class Gum implements VendableItems{
 	}
 	@Override
 	public String dispense() {
-		String vendMsg= "Chew Chew Yum!!!!";
+		String vendMsg= "Crunch Crunch Yum !!!!";
 		quantity= getQuantity()-1;
 		return vendMsg;
 		
 	}
+
+	@Override
+	public String slot() {
+		return slot ;
+	}
+
+	public String getSlot() {
+		return slot;
+	}
+	@Override
+	public String toString() {
+		return getName() + getPrice() + getSlot();
+	}
+	
 	
 }
