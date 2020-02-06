@@ -1,6 +1,6 @@
 import java.math.BigDecimal;
 
-public class Candy {
+public class Candy implements VendableItems{
 	private String name;
 	private BigDecimal price;
 	private int quantity;
@@ -24,6 +24,7 @@ public class Candy {
 	public int getQuantity() {
 		return quantity;
 	}
+	@Override
 	public String dispense() {
 		String vendMsg= "Munch Munch Yum!!!!! ";
 		quantity= getQuantity()-1;
