@@ -28,16 +28,25 @@ public class VendingMachine {
 				name = inventoryUpload[1];
 				price = new BigDecimal(inventoryUpload[2]);
 				type = inventoryUpload[3];
-				if (inventoryUpload[3].equals("Chip")) {
+				if (type.equals("Chip")) {
 					Chips c = new Chips(slot, name, price, quantity);
-					inventory.put(inventoryUpload[0], c);
+					inventory.put(slot, c);
+				} else if (type.equals("Gum")) {
+					Gum g = new Gum(slot, name, price, quantity);
+					inventory.put(slot, g);
+				} else if (type.equals("Drink")) {
+					Beverage b = new Beverage(slot, name, price, quantity);
+					inventory.put(slot, b);
+				} else if (type.equals("Candy")) {
+					Candy c = new Candy(slot, name, price, quantity);
+					inventory.put(slot, c);
 				}
-
 			}
 		} catch (FileNotFoundException e) {
 		}
 	}
+
 	public String slotA1contents() {
-		return inventory.get("A1").toString();
+		return inventory.get("B1").toString();
 	}
 }

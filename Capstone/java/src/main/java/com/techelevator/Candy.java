@@ -34,6 +34,7 @@ public class Candy implements VendableItems{
 		quantity= getQuantity()-1;
 		return vendMsg;
 		
+		
 	}
 
 	@Override
@@ -41,5 +42,8 @@ public class Candy implements VendableItems{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	@Override
+	public String toString() {
+		return getName() + getPrice() + getSlot();
+	}
 }
