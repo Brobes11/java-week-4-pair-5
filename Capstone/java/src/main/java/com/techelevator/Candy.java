@@ -39,8 +39,7 @@ public class Candy implements VendableItems{
 
 	@Override
 	public String slot() {
-		// TODO Auto-generated method stub
-		return null;
+		return slot;
 	}
 	@Override
 	public String toString() {

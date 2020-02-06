@@ -8,7 +8,7 @@ public class Beverage implements VendableItems {
 	private String slot;
 
 	public Beverage (String slot, String name, BigDecimal price, int quantity) {
-
+		this.slot = slot;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
@@ -38,8 +38,7 @@ public class Beverage implements VendableItems {
 
 	@Override
 	public String slot() {
-		// TODO Auto-generated method stub
-		return null;
+		return slot;
 	}
 	
 }
