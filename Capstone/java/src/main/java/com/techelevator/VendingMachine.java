@@ -64,8 +64,5 @@ public class VendingMachine {
 		}
 		return result;
 	}
-	public String displayPurchaseMenu() {
-		return null;
-	}
 
 }

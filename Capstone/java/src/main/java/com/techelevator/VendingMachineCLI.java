@@ -15,6 +15,7 @@ public class VendingMachineCLI {
 
 	private Menu menu;
 	private VendingMachine vendingMachine;
+	private CashBox cashBox;
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
@@ -32,6 +33,7 @@ public class VendingMachineCLI {
 				boolean subDone = false;
 				while (subDone == false) {
 					choice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+					System.out.println("Balance: " + cashBox.getBalance());
 					if (choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 						//do deposit
 					} else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
