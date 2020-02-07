@@ -1,7 +1,7 @@
 package com.techelevator;
 import java.math.BigDecimal;
 
-public class Candy implements VendableItems{
+public class Candy implements VendableItem{
 	private String name;
 	private BigDecimal price;
 	private int quantity;

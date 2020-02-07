@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class VendingMachine {
-	private Map<String, VendableItems> inventory = new LinkedHashMap<>();
-	
+	private Map<String, VendableItem> inventory = new LinkedHashMap<>();
+	private CashBox cashBox = new CashBox();
 
 	public VendingMachine() {
 
@@ -19,7 +19,7 @@ public class VendingMachine {
 		String slot;
 		String name;
 		String type;
-		int quantity = 5; 
+		int quantity = 5;
 
 		try (Scanner layoutScanner = new Scanner(sourceFile)) {
 
@@ -52,17 +52,40 @@ public class VendingMachine {
 	public String displayItems() {
 		String result = "";
 		String soldOutNote = "";
-		
+
 		for (String s : inventory.keySet()) {
-			VendableItems currentItem = inventory.get(s);
+			VendableItem currentItem = inventory.get(s);
 			int itemQuantity = currentItem.getQuantity();
-				if (itemQuantity == 0) {
-					soldOutNote = " *SOLD OUT*";
-				}
-			result += (currentItem.slot() + " " + currentItem.getName() + " " + "$" + 
-			currentItem.getPrice() + soldOutNote + "\n ");
+			if (itemQuantity == 0) {
+				soldOutNote = " *SOLD OUT*";
+			}
+			result += (currentItem.slot() + " " + currentItem.getName() + " " + "$" + currentItem.getPrice()
+					+ soldOutNote + "\n ");
 		}
 		return result;
+	}
+
+	public String purchase(String userSelection) {
+		String result = "Item not available";
+		if (inventory.containsKey(userSelection)) {
+			VendableItem selectedItem = inventory.get(userSelection);
+			if (selectedItem.getQuantity() > 0 && (cashBox.getBalance().compareTo(selectedItem.getPrice()) > 0)) {
+				result = selectedItem.dispense();
+				cashBox.makePurchase(selectedItem);
+			}
+		}
+		return result;
+
+	}
+
+	public BigDecimal getBalance() {
+
+		return cashBox.getBalance();
+
+	}
+
+	public void makeDeposit(BigDecimal depositAmt) {
+		cashBox.makeDeposit(depositAmt);
 	}
 
 }

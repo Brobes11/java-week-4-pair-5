@@ -1,7 +1,7 @@
 package com.techelevator;
 import java.math.BigDecimal;
 
-public interface VendableItems {
+public interface VendableItem {
 	public String slot();
 	public String getName();
 	public BigDecimal getPrice();
