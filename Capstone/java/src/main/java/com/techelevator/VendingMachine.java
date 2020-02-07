@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class VendingMachine {
 	private Map<String, VendableItems> inventory = new LinkedHashMap<>();
+	
 
 	public VendingMachine() {
 
@@ -18,7 +19,7 @@ public class VendingMachine {
 		String slot;
 		String name;
 		String type;
-		int quantity = 5;
+		int quantity = 5; 
 
 		try (Scanner layoutScanner = new Scanner(sourceFile)) {
 
@@ -44,18 +45,27 @@ public class VendingMachine {
 				}
 			}
 		} catch (FileNotFoundException e) {
+			System.out.println("File not found.");
 		}
 	}
 
 	public String displayItems() {
-		String result="";
+		String result = "";
+		String soldOutNote = "";
+		
 		for (String s : inventory.keySet()) {
 			VendableItems currentItem = inventory.get(s);
-			result += (currentItem.slot()+" " +currentItem.getName()+" "
-			+"$" +currentItem.getPrice()+ " "+ "\n " );
-		
+			int itemQuantity = currentItem.getQuantity();
+				if (itemQuantity == 0) {
+					soldOutNote = " *SOLD OUT*";
+				}
+			result += (currentItem.slot() + " " + currentItem.getName() + " " + "$" + 
+			currentItem.getPrice() + soldOutNote + "\n ");
 		}
 		return result;
-		
 	}
+	public String displayPurchaseMenu() {
+		return null;
+	}
+
 }
