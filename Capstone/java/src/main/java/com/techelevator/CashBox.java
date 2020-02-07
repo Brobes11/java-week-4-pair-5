@@ -21,4 +21,7 @@ public class CashBox {
 	public void makeDeposit(BigDecimal depositAmt) {
 		balance = balance.add(depositAmt);
 	}
+	public void makePurchase() {
+		
+	}
 }
