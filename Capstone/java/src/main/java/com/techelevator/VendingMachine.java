@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class VendingMachine {
 	private Map<String, VendableItem> inventory = new LinkedHashMap<>();
 	private CashBox cashBox = new CashBox();
-
+	private LogWriter logWriter= new LogWriter();
 	public VendingMachine() {
 
 		File sourceFile = new File("VendingMachine.txt");
@@ -82,6 +82,7 @@ public class VendingMachine {
 			if (selectedItem.getQuantity() > 0 && (cashBox.getBalance().compareTo(selectedItem.getPrice()) > 0)) {
 				result = selectedItem.dispense();
 				cashBox.makePurchase(selectedItem);
+				logWriter.logTransaction(selectedItem.getName(),selectedItem.slot(), selectedItem.getPrice(),cashBox.getBalance());
 			}
 		}
 		return result;
@@ -96,10 +97,15 @@ public class VendingMachine {
 
 	public void makeDeposit(BigDecimal depositAmt) {
 		cashBox.makeDeposit(depositAmt);
+		logWriter.logDeposit(depositAmt,cashBox.getBalance());
 	}
 
 	public String getChange() {
-		return cashBox.getChange();
+		BigDecimal change = getBalance();
+		String message = cashBox.getChange();	
+		logWriter.logChange(change,cashBox.getBalance());
+		return message;
+		
 	}
 
 	public void salesReport() {
@@ -112,8 +118,8 @@ public class VendingMachine {
 			}
 			salesWriter.println("**TOTAL SALES** $" + cashBox.getSpent());
 		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
+			
+			//add error message
 		}
 	}
 }

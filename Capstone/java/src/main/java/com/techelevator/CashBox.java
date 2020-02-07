@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 public class CashBox {
 
 	private BigDecimal balance;
-	private BigDecimal change;
 	private BigDecimal spent;
 
 	public CashBox() {
@@ -69,14 +68,19 @@ public class CashBox {
 			nickelLabel = "nickel";
 		}
 		
+		
+		
 		String result = "Your change is "+ dollar + dollarLabel+ ", "+ quarter + quarterLabel+", "
 		+ dime + dimeLabel +", " + nickel + nickelLabel;
+		
 		return result;
+		
 		}
 	
 
 	public void makeDeposit(BigDecimal depositAmt) {
 		balance = balance.add(depositAmt);
+		
 	}
 
 	public void makePurchase(VendableItem selectedItem) {
