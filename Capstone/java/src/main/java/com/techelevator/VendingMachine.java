@@ -2,9 +2,12 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -58,6 +61,8 @@ public class VendingMachine {
 			int itemQuantity = currentItem.getQuantity();
 			if (itemQuantity == 0) {
 				soldOutNote = " *SOLD OUT*";
+			} else {
+				soldOutNote = "";
 			}
 			result += (currentItem.slot() + " " + currentItem.getName() + " " + "$" + currentItem.getPrice()
 					+ soldOutNote + "\n ");
@@ -66,6 +71,11 @@ public class VendingMachine {
 	}
 
 	public String purchase(String userSelection) {
+		if (cashBox.getBalance().compareTo(BigDecimal.ZERO) == 0) {
+			return "You're poor. NO FOOD FOR YOU >:O  !!";
+
+		}
+
 		String result = "Item not available";
 		if (inventory.containsKey(userSelection)) {
 			VendableItem selectedItem = inventory.get(userSelection);
@@ -88,4 +98,22 @@ public class VendingMachine {
 		cashBox.makeDeposit(depositAmt);
 	}
 
+	public String getChange() {
+		return cashBox.getChange();
+	}
+
+	public void salesReport() {
+		int quantity = 5;
+		File salesReportFile = new File("salesReport.txt");
+		try (PrintWriter salesWriter = new PrintWriter(salesReportFile)) {
+			for (String sr : inventory.keySet()) {
+				VendableItem currentItem = inventory.get(sr);
+				salesWriter.println(currentItem.getName() + " | " + (quantity - currentItem.getQuantity()));
+			}
+			salesWriter.println("**TOTAL SALES** $" + cashBox.getSpent());
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		}
+	}
 }
