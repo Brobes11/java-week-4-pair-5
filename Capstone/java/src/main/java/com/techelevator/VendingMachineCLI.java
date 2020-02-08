@@ -29,9 +29,21 @@ public class VendingMachineCLI {
 
 	public void run() {
 		boolean done = false;
+		System.out.println("    _    __               ___             ");     
+		System.out.println("   | |  / /__  ____  ____/ (_)___  ____ _ ");     
+		System.out.println("   | | / / _ \\/ __ \\/ __  / / __ \\/ __ `/ ");     
+		System.out.println("   | |/ /  __/ / / / /_/ / / / / / /_/ /  ");     
+		System.out.println("   |___/\\___/_/ /_/\\__,_/_/_/ /_/\\__, /   ");     
+		System.out.println("                                /____/    ");     
+		System.out.println("         __  ___           __    "
+				+ "_     ");     
+		System.out.println("        /  |/  /___ ______/ /_  (_)___  ___ ");
+		System.out.println("       / /|_/ / __ `/ ___/ __ \\/ / __ \\/ _ \\");
+		System.out.println("      / /  / / /_/ / /__/ / / / / / / /  __/");
+		System.out.println("     /_/  /_/\\__,_/\\___/_/ /_/_/_/ /_/\\___/");
+	  
 		while (done == false) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				System.out.println(vendingMachine.displayItems());
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
