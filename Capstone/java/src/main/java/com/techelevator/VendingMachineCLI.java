@@ -37,17 +37,20 @@ public class VendingMachineCLI {
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				boolean subDone = false;
 				while (subDone == false) {
-					System.out.println("Balance: $" + vendingMachine.getBalance());
+					System.out.println("\n");
+					System.out.println("------------------");
+					System.out.println("  Balance: $" + vendingMachine.getBalance());
+					System.out.println("------------------");
 					choice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 					if (choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
-						System.out.println("Please enter the amount you'd like to add (in whole dollars)");
+						System.out.println("Please enter the amount you'd like to add (in whole dollars) >>> ");
 						String userDeposit = userInput.nextLine();
 						BigDecimal depositAmt  = new BigDecimal(userDeposit);
 								vendingMachine.makeDeposit(depositAmt);
 					} else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-						System.out.println("Please make your selection...");
+						System.out.println("Please make your selection >>>");
 						String userSelection = userInput.nextLine();
-						String purchase = vendingMachine.purchase(userSelection);
+						String purchase = vendingMachine.purchase(userSelection.toUpperCase());
 						System.out.println(purchase);
 
 					} else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -13,10 +15,11 @@ import java.util.Scanner;
 
 public class VendingMachine {
 	private Map<String, VendableItem> inventory = new LinkedHashMap<>();
+	
 	private CashBox cashBox = new CashBox();
 	private LogWriter logWriter= new LogWriter();
 	public VendingMachine() {
-
+	
 		File sourceFile = new File("VendingMachine.txt");
 		BigDecimal price;
 		String slot;
@@ -72,7 +75,7 @@ public class VendingMachine {
 
 	public String purchase(String userSelection) {
 		if (cashBox.getBalance().compareTo(BigDecimal.ZERO) == 0) {
-			return "You're poor. NO FOOD FOR YOU >:O  !!";
+			return "Please deposit money before making a selection";
 
 		}
 
@@ -82,7 +85,10 @@ public class VendingMachine {
 			if (selectedItem.getQuantity() > 0 && (cashBox.getBalance().compareTo(selectedItem.getPrice()) > 0)) {
 				result = selectedItem.dispense();
 				cashBox.makePurchase(selectedItem);
-				logWriter.logTransaction(selectedItem.getName(),selectedItem.slot(), selectedItem.getPrice(),cashBox.getBalance());
+				LocalDateTime timeStamp = LocalDateTime.now();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss a");
+				String formatStamp = timeStamp.format(formatter);
+				logWriter.logTransaction(formatStamp,selectedItem.getName(),selectedItem.slot(), selectedItem.getPrice(),cashBox.getBalance());
 			}
 		}
 		return result;
@@ -97,13 +103,19 @@ public class VendingMachine {
 
 	public void makeDeposit(BigDecimal depositAmt) {
 		cashBox.makeDeposit(depositAmt);
-		logWriter.logDeposit(depositAmt,cashBox.getBalance());
+		LocalDateTime timeStamp = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss a");
+		String formatStamp = timeStamp.format(formatter);
+		logWriter.logDeposit(formatStamp,depositAmt,cashBox.getBalance());
 	}
 
 	public String getChange() {
 		BigDecimal change = getBalance();
 		String message = cashBox.getChange();	
-		logWriter.logChange(change,cashBox.getBalance());
+		LocalDateTime timeStamp = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss a");
+		String formatStamp = timeStamp.format(formatter);
+		logWriter.logChange(formatStamp, change,cashBox.getBalance());
 		return message;
 		
 	}
@@ -116,6 +128,7 @@ public class VendingMachine {
 				VendableItem currentItem = inventory.get(sr);
 				salesWriter.println(currentItem.getName() + " | " + (quantity - currentItem.getQuantity()));
 			}
+			salesWriter.println("");
 			salesWriter.println("**TOTAL SALES** $" + cashBox.getSpent());
 		} catch (FileNotFoundException e) {
 			

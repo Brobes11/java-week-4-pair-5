@@ -29,7 +29,7 @@ public class Gum implements VendableItem {
 
 	@Override
 	public String dispense() {
-		String vendMsg = "Chew Chew Yum!!!!";
+		String vendMsg = "Chew Chew, Yum!";
 		quantity = getQuantity() - 1;
 		return vendMsg;
 

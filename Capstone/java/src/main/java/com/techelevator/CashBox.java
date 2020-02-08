@@ -21,10 +21,10 @@ public class CashBox {
 		int quarter = 0;
 		int dime = 0;
 		int nickel = 0;
-		String dollarLabel ="";
-		String quarterLabel ="";
-		String dimeLabel="";
-		String nickelLabel="";
+		String dollarLabel ="dollar(s)";
+		String quarterLabel ="quarter(s)";
+		String dimeLabel="dime(s)";
+		String nickelLabel="nickel(s)";
 		
 		BigDecimal pennies = new BigDecimal("100");
 		BigDecimal centsBalance = balance.multiply(pennies);
@@ -47,31 +47,10 @@ public class CashBox {
 				nickel++;
 			}
 		}
-		if (dollar >1) {
-			dollarLabel= "dollars";
-		} else if (dollar == 1){
-			dollarLabel = "dollar";
-		}
-		if (quarter >1) {
-			quarterLabel = "quarters";
-		} else if (quarter ==1) {
-			quarterLabel = "quarter";
-		}
-		if (dime >1) {
-			dimeLabel = "dimes";
-		} else if (dime ==1) {
-			dimeLabel = "dime";
-		}
-		if (nickel >1) {
-			nickelLabel = "nickels";
-		} else if (quarter ==1) {
-			nickelLabel = "nickel";
-		}
+
 		
-		
-		
-		String result = "Your change is "+ dollar + dollarLabel+ ", "+ quarter + quarterLabel+", "
-		+ dime + dimeLabel +", " + nickel + nickelLabel;
+		String result = "\nYour change is: \n"+ dollar +" "+ dollarLabel+ ", "+ quarter +" "+ quarterLabel+", "
+		+ dime +" "+ dimeLabel +", " + nickel + " "+ nickelLabel;
 		
 		return result;
 		
@@ -79,8 +58,11 @@ public class CashBox {
 	
 
 	public void makeDeposit(BigDecimal depositAmt) {
+		if (depositAmt.compareTo(BigDecimal.ZERO) > 0){
 		balance = balance.add(depositAmt);
-		
+		} else {
+			System.out.println("Please deposit a valid amount");
+		}
 	}
 
 	public void makePurchase(VendableItem selectedItem) {

@@ -30,7 +30,7 @@ public class Beverage implements VendableItem {
 	}
 	@Override
 	public String dispense() {
-		String vendMsg= "Glug Glug Yum !!!!";
+		String vendMsg= "Glug Glug, Yum!";
 		quantity= getQuantity()-1;
 		return vendMsg;
 		

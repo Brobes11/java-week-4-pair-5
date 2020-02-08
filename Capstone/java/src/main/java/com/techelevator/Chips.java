@@ -28,7 +28,7 @@ public class Chips implements VendableItem {
 	}
 	@Override
 	public String dispense() {
-		String vendMsg= "Crunch Crunch Yum !!!!";
+		String vendMsg= "Crunch Crunch, Yum!";
 		quantity= getQuantity()-1;
 		return vendMsg;
 		
