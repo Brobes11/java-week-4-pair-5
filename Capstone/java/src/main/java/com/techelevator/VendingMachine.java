@@ -56,7 +56,7 @@ public class VendingMachine {
 	}
 
 	public String displayItems() {
-		String result = "";
+	String result="";
 		String soldOutNote = "";
 
 		for (String s : inventory.keySet()) {
@@ -67,10 +67,14 @@ public class VendingMachine {
 			} else {
 				soldOutNote = "";
 			}
-			result += (currentItem.slot() + " " + currentItem.getName() + " " + "$" + currentItem.getPrice()
-					+ soldOutNote + "\n ");
+			 result += String.format("%-10s%-25s$%-15.02f%-10s\n",
+					 currentItem.slot(),currentItem.getName(),currentItem.getPrice(),soldOutNote);
+			
+			
 		}
+		System.out.println("\n'~'-.,__,.-'~'-.Menu,__,.-'~'-.,__,.-'~'");
 		return result;
+		
 	}
 
 	public String purchase(String userSelection) {
